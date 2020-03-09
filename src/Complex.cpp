@@ -10,27 +10,27 @@ Complex::~Complex() {
 	delete this->imaginaryPart;
 }
 
-Complex add(Complex other) {
+Complex Complex::add(Complex other) {
 	// TODO
 	return this;
 }
 
-Complex mult(Complex other) {
+Complex Complex::mult(Complex other) {
 	// TODO
 	return this;
 }
 
-Complex quot(Complex other) {
+Complex Complex::quot(Complex other) {
 	// TODO
 	return this;
 }
 
-Complex abs() {
+Complex Complex::abs() {
 	// TODO
 	return this;
 }
 
-Complex compute_polar() {
+Complex Complex::compute_polar() {
 	// TODO
 	return this;
 }
