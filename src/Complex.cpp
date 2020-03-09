@@ -1,8 +1,8 @@
 #include <Complex.h>
 
-Complex::Complex() {
-	this->realPart = 0.0;
-	this->imaginaryPart = 0.0;
+Complex::Complex(int realPart, int imaginaryPart) {
+	this->realPart = realPart;
+	this->imaginaryPart = imaginaryPart;
 }
 
 Complex::~Complex() {

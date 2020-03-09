@@ -14,7 +14,7 @@ class Complex {
 
 	public:
 		// Specified constructor.
-		Complex();
+		Complex(int realPart, int imaginaryPart);
 
 		// Adds 2 complex numbers together and returns the sum.
 		Complex add(Complex other);
