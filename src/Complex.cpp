@@ -1,11 +1,13 @@
 #include <Complex.h>
 
 Complex::Complex() {
-	// TODO.
+	this->realPart = 0.0;
+	this->imaginaryPart = 0.0;
 }
 
 Complex::~Complex() {
-	// TODO.
+	delete this->realPart;
+	delete this->imaginaryPart;
 }
 
 Complex add(Complex other) {
