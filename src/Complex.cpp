@@ -1,6 +1,6 @@
 #include <Complex.h>
 
-Complex::Complex(int realPart, int imaginaryPart) {
+Complex::Complex(double realPart, double imaginaryPart) {
 	this->realPart = realPart;
 	this->imaginaryPart = imaginaryPart;
 }
