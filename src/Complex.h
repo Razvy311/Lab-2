@@ -4,6 +4,7 @@
  *  Created on: Mar 9, 2020
  *      Author: Razvy311
  */
+#pragma once
 
 #include <utility>
 
@@ -15,6 +16,7 @@ class Complex {
 	public:
 		// Specified constructor.
 		Complex(double realPart, double imaginaryPart);
+		~Complex();
 
 		// Adds 2 complex numbers together and returns the sum.
 		Complex add(Complex other);
