@@ -7,6 +7,9 @@
 #pragma once
 
 #include <utility>
+#include <math.h>
+#include <iostream>
+#include <string>
 
 class Complex {
 	private:
@@ -18,6 +21,16 @@ class Complex {
 		Complex(double realPart, double imaginaryPart);
 		~Complex();
 
+		// Getters.
+		double getRealPart();
+		double getImaginaryPart();
+
+		// Shows the complex number in its standard form.
+		std::string show_compl();
+
+		// Shows the complex number in exponential form.
+		std::string show_exp();
+
 		// Adds 2 complex numbers together and returns the sum.
 		Complex add(Complex other);
 
@@ -28,8 +41,8 @@ class Complex {
 		Complex quot(Complex other);
 
 		// Returns the absolute values of a complex number.
-		Complex abs();
+		double abs();
 
 		// Returns the polar form of a complex number.
-		Complex compute_polar();
+		std::string compute_polar();
 };
