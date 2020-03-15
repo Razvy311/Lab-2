@@ -51,16 +51,24 @@ string Rational::show_exp() {
 	string rationalNumber = show_rational();
 
 	string wholePart = rationalNumber.substr(0, rationalNumber.find('.'));
-	string decimalPart = rationalNumber.substr(rationalNumber.find('.') + 1, rationalNumber.length() - wholePart.length() - 1);
+
+	string decimalPart = "";
+	if(rationalNumber.find('.') != -1)
+		decimalPart = rationalNumber.substr(rationalNumber.find('.') + 1, rationalNumber.length() - wholePart.length() - 1);
 
 	// Construct the exponential form.
 	string result = "";
 
 	// Whole part.
 	for(unsigned int i = 0; i < wholePart.length(); ++i) {
-		if(result.length() != 0)
-			result += " + ";
+		if(wholePart.at(i) == '-') {
+			result += " -";
+			continue;
+		}
+
 		result += string(1, wholePart.at(i)) + "*10^" + to_string(wholePart.length() - i - 1);
+		if(i != wholePart.length() - 1)
+			result += " + ";
 	}
 
 	// Decimal part.
@@ -113,4 +121,9 @@ Rational Rational::quot(Rational other) {
  */
 Rational Rational::abs() {
 	return Rational(this->value >= 0 ? this->value : -this->value);
+}
+
+/** The default sort operator. */
+bool operator <(const Rational &rational1, const Rational &rational2) {
+	return (rational1.getValue() < rational2.getValue());
 }

@@ -41,8 +41,11 @@ class Complex {
 		Complex quot(Complex other);
 
 		// Returns the absolute values of a complex number.
-		double abs();
+		double abs() const;
 
 		// Returns the polar form of a complex number.
 		std::string compute_polar();
 };
+
+// The default comparison operator.
+bool operator <(const Complex &complex1, const Complex &complex2);

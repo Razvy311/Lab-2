@@ -33,4 +33,6 @@ class Rational {
 		Rational abs();
 };
 
+// The default comparison operator.
+bool operator <(const Rational &rational1, const Rational &rational2);
 

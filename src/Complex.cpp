@@ -101,7 +101,7 @@ Complex Complex::quot(Complex other) {
  *
  * @return The absolute value of a complex number.
  */
-double Complex::abs() {
+double Complex::abs() const {
 	return sqrt(pow(this->realPart, 2) + pow(this->imaginaryPart, 2));
 }
 
@@ -116,4 +116,9 @@ std::string Complex::compute_polar() {
 	double radius = this->abs();
 	double argument = atan(double(this->imaginaryPart / this->realPart));
 	return std::to_string(radius) + "*(cos " + std::to_string(argument) + " + i * sin " + std::to_string(argument) + ")";
+}
+
+/** The default sort operator. */
+bool operator <(const Complex &complex1, const Complex &complex2) {
+	return (complex1.abs() < complex2.abs());
 }
