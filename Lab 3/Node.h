@@ -13,6 +13,8 @@ class Node {
 		Node * leftSon;
 		Node * rightSon;
 	public:
+
+		// Specified constructors.
 		Node(int data);
 		Node(int data, Node* parent);
 
