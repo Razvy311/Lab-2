@@ -4,6 +4,9 @@
 
 class Node {
 	private:
+	/*
+		The class Node signifies the node of a tree, having a parent, a left son and a right son.
+	*/
 		int data;
 
 		Node * parent;
@@ -15,6 +18,8 @@ class Node {
 
 		~Node();
 
+
+		// Getters and setters.
 		int getData();
 
 		void setData(int);

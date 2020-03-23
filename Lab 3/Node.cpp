@@ -9,6 +9,7 @@
 #include <iostream>
 
 Node::Node(int data) {
+	// Representation for the root.
 	this->data = data;
 
 	this->parent = NULL;

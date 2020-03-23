@@ -23,6 +23,7 @@ void Tree::remove(int v, Node * tree) {
 	if(tree->getData() == v)
 		// Found the value.
 		if(tree->getLeftSon() != nullptr && tree->getRightSon() != nullptr)
+			// If it has not reached the base of the tree, ..
 			if(tree->getRightSon()->getLeftSon() == nullptr) {
 				tree->setData(tree->getRightSon()->getData());
 				tree->setRightSon(tree->getRightSon()->getRightSon());
@@ -35,6 +36,7 @@ void Tree::remove(int v, Node * tree) {
 				rightLeave->getParent()->setLeftSon(nullptr);
 			}
 		else if(tree->getLeftSon() == nullptr && tree->getRightSon() == nullptr)
+			// If it has reached the base of the tree, ..
 			if(tree->getParent()->getLeftSon()->getData() == v)
 				tree->getParent()->setLeftSon(nullptr);
 			else
@@ -79,16 +81,19 @@ void Tree::insert(int v, Node * tree) {
 }
 
 int Tree::height(Node* n) {
+	// This function calculates the height of the tree, the distance between the root and the base.
 	if(n == nullptr)
 		return 0;
 	return std::max(height(n->getLeftSon()), height(n->getRightSon())) + 1;
 }
 
 int Tree::countEdges(Node* n) {
+	// This function calculates the number of edges in the tree with the formula nrOfNodes - 1.
 	return countNodes(n) - 1;
 }
 
 int Tree::countNodes(Node* n) {
+	// This function calculates the numebr of nodes in the tree.
 	if(n == nullptr)
 		return 0;
 
@@ -101,18 +106,21 @@ int Tree::countNodes(Node* n) {
 }
 
 std::string Tree::inorder(Node* n) {
+	// Returns in order: left-root-right.
 	std::string leftSide = n->getLeftSon() == nullptr ? "" : inorder(n->getLeftSon());
 	std::string rightSide = n->getRightSon() == nullptr ? "" : inorder(n->getRightSon());
 	return leftSide + std::to_string(n->getData()) + " " + rightSide;
 }
 
 std::string Tree::preorder(Node* n) {
+	// Returns in order: root-left-right.
 	std::string leftSide = n->getLeftSon() == nullptr ? "" : inorder(n->getLeftSon());
 	std::string rightSide = n->getRightSon() == nullptr ? "" : inorder(n->getRightSon());
 	return std::to_string(n->getData()) + " " + leftSide + rightSide;
 }
 
 std::string Tree::postorder(Node* n) {
+	// Returns in oredr: left-right-root.
 	std::string leftSide = n->getLeftSon() == nullptr ? "" : inorder(n->getLeftSon());
 	std::string rightSide = n->getRightSon() == nullptr ? "" : inorder(n->getRightSon());
 	return leftSide + rightSide + std::to_string(n->getData()) + " ";
@@ -120,6 +128,7 @@ std::string Tree::postorder(Node* n) {
 
 // Helper Methods
 void Tree::printNodes(Node* tree) {
+	// This function prints the nodes.
 	if(tree == nullptr)
 		return;
 

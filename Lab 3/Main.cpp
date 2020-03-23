@@ -7,8 +7,30 @@
 
 #include "Tree.h"
 #include <iostream>
+#include <assert.h>
+
+void tests(){
+	// This function tests the functionalities.
+	Tree * t = new Tree();
+	Node startNode (50);
+
+	t->insert(30, &startNode);
+	t->insert(25, &startNode);
+	t->insert(70, &startNode);
+	t->insert(60, &startNode);
+	t->insert(80, &startNode);
+	t->insert(55, &startNode);
+
+    t->remove(50, &startNode);
+
+	assert(t->countEdges(&startNode) == 5);
+	assert(t->countNodes(&startNode) == 6);
+	assert(t->height(&startNode) == 3);	
+}
 
 int main() {
+	tests();
+
 	Tree * t = new Tree();
 	Node startNode (50);
 

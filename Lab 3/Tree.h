@@ -2,9 +2,14 @@
 
 #include "Node.h"
 #include <iostream>
+#include <string>
+#include <algorithm>
 
 class Tree {
 	public:
+	/*
+		The class Tree signifies a binary search tree with all its methods.
+	*/
 		Tree();
 		~Tree();
 
