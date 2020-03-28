@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 
 class Schokolade{
@@ -9,8 +11,6 @@ class Schokolade{
 
         // Constructor.
         Schokolade(std::string name, std::string typ, double preis);
-        // Destructor.
-        ~Schokolade();
 
         // Getters.
         std::string getName();
@@ -21,4 +21,6 @@ class Schokolade{
         void setName(std::string newName);
         void setTyp(std::string newTyp);
         void setPreis(double neuPreis);
+
+        std::string printSchoko();
 };

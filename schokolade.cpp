@@ -42,3 +42,7 @@ void Schokolade::setPreis(double neuPreis){
     // @param neuPreis: a real number representing the price to be changed with.
     preis = neuPreis;
 }
+
+std::string Schokolade::printSchoko(){
+    return name + " " + typ + " " + std::to_string(preis);
+}
