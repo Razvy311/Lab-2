@@ -25,39 +25,39 @@ int main() {
 	controller->addMedikament(new Medikament("Name2", 82.2, 44.2, 2));
 
 	// Check if the vector is created right.
-	assert(controller->getRepository()->getMedikamente().size() == 4);
+	assert(controller->getRepository()->getMedikamente().size() == 5);
 
 	cout << "Medikamente: " << endl;
 	for(Medikament * m : controller->getRepository()->getMedikamente())
 		cout << "   " << m->toString() << endl;
 
 	// Test the remove function.
-	controller->getRepository()->removeMedikament("Name3");
+	controller->getRepository()->removeMedikament("Name3", 17.9);
 
-	assert(controller->getRepository()->getMedikamente().size() == 3);
+	assert(controller->getRepository()->getMedikamente().size() == 4);
 	for(Medikament * m : controller->getRepository()->getMedikamente())
-		assert(m->getName() != "Name3");
+		assert(m->getName() != "Name3" || m->getKonzenration() != 17.9);
 
 	// Test modification functions.
-	controller->getRepository()->modifyMedikament("Name4", "Name3");
-	assert(controller->getRepository()->getMedikamente().size() == 3);
+	controller->getRepository()->modifyMedikament("Name4", 7.8, "Name3");
+	assert(controller->getRepository()->getMedikamente().size() == 4);
 	for(Medikament * m : controller->getRepository()->getMedikamente())
-		assert(m->getName() != "Name4");
+		assert(m->getName() != "Name4" || m->getKonzenration() != 7.8);
 
-	controller->getRepository()->modifyMedikamentK("Name1", 9.0);
-	assert(controller->getRepository()->getMedikamente().size() == 3);
+	controller->getRepository()->modifyMedikamentK("Name1", 90.2, 9.0);
+	assert(controller->getRepository()->getMedikamente().size() == 4);
 	for(Medikament * m : controller->getRepository()->getMedikamente())
-		assert(m->getKonzenration() != 90.2);
+		assert(m->getKonzenration() != 90.2 || m->getName() != "Name1");
 
-	controller->getRepository()->modifyMedikamentP("Name3", 44.2);
-	assert(controller->getRepository()->getMedikamente().size() == 3);
+	controller->getRepository()->modifyMedikamentP("Name3", 12.2, 44.2);
+	assert(controller->getRepository()->getMedikamente().size() == 4);
 	for(Medikament * m : controller->getRepository()->getMedikamente())
-		assert(m->getPreis() != 4.3);
+		assert(m->getPreis() != 4.3 || m->getName() != "Name3" || m->getKonzenration() != 12.2);
 
-	controller->getRepository()->modifyMedikamentM("Name1", 18);
-	assert(controller->getRepository()->getMedikamente().size() == 3);
+	controller->getRepository()->modifyMedikamentM("Name1", 9.0, 18);
+	assert(controller->getRepository()->getMedikamente().size() == 4);
 	for(Medikament * m : controller->getRepository()->getMedikamente())
-		assert(m->getMenge() != 3);
+		assert(m->getMenge() != 3 || m->getName() != "Name1" || m->getKonzenration() != 9.0);
 	// Repository working correctly if we got to this point.
 
 	cout << endl;
@@ -66,7 +66,7 @@ int main() {
 	vector<string> firstList = controller->filterByName("Name");
 	vector<string> secondList = controller->filterByName("e1");
 
-	assert(firstList.size() == 3);
+	assert(firstList.size() == 4);
 	assert(secondList.size() == 1);
 
 	cout << "FirstFilter (Name): " << endl;

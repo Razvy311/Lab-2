@@ -19,14 +19,15 @@ class MedikamentRepository {
 		~MedikamentRepository();
 
 		void addMedikament(Medikament* medikament);
-		void removeMedikament(std::string name);
+		void removeMedikament(std::string name, double konzentration);
 
-		void modifyMedikament(std::string name, std::string newName);
-		void modifyMedikamentM(std::string name, int menge);
-		void modifyMedikamentP(std::string name, double preis);
-		void modifyMedikamentK(std::string name, double konzentration);
+		void modifyMedikament(std::string name, double konzentration,  std::string newName);
+		void modifyMedikamentM(std::string name, double konzentration, int menge);
+		void modifyMedikamentP(std::string name, double konzentration, double preis);
+		void modifyMedikamentK(std::string name, double konzentration, double newKonzentration);
 
 		std::vector<Medikament*> getMedikamente();
+		void setMedikamente(std::vector<Medikament *> newMeds);
 };
 
 #endif /* MEDIKAMENTREPOSITORY_H_ */

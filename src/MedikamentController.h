@@ -12,10 +12,14 @@
 #include <vector>
 #include "Medikament.h"
 #include "MedikamentRepository.h"
+#include "undo_redo.h"
+class Undo_Redo;
 
 class MedikamentController {
 	private:
 		MedikamentRepository * repository;
+		Undo_Redo * undo_redo;
+
 	public:
 		MedikamentController();
 		~MedikamentController();
@@ -27,14 +31,17 @@ class MedikamentController {
 
 		// Repository functions.
 		void addMedikament(Medikament* medikament);
-		void removeMedikament(std::string name);
+		void removeMedikament(std::string name, double konzentration);
 
-		void modifyMedikament(std::string name, std::string newName);
-		void modifyMedikamentM(std::string name, int menge);
-		void modifyMedikamentP(std::string name, double preis);
-		void modifyMedikamentK(std::string name, double konzentration);
+		void modifyMedikament(std::string name, double konzentration, std::string newName);
+		void modifyMedikamentM(std::string name, double konzentration, int menge);
+		void modifyMedikamentP(std::string name, double konzentration, double preis);
+		void modifyMedikamentK(std::string name, double konzentration, double newKonzentration);
 
 		MedikamentRepository * getRepository();
+
+		void callUndo();
+		void callRedo();
 };
 
 #endif /* MEDIKAMENTCONTROLLER_H_ */
