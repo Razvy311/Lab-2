@@ -25,6 +25,9 @@ MedikamentController::~MedikamentController() {
 
 void MedikamentController::addMedikament(Medikament* medikament) {
 	this->repository->addMedikament(medikament);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());
@@ -32,6 +35,9 @@ void MedikamentController::addMedikament(Medikament* medikament) {
 
 void MedikamentController::removeMedikament(std::string name, double konzentration) {
 	this->repository->removeMedikament(name, konzentration);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());
@@ -39,6 +45,9 @@ void MedikamentController::removeMedikament(std::string name, double konzentrati
 
 void MedikamentController::modifyMedikament(std::string name, double konzentration, std::string newName) {
 	this->repository->modifyMedikament(name, konzentration, newName);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());
@@ -46,6 +55,9 @@ void MedikamentController::modifyMedikament(std::string name, double konzentrati
 
 void MedikamentController::modifyMedikamentM(std::string name, double konzentration, int menge) {
 	this->repository->modifyMedikamentM(name, konzentration, menge);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());
@@ -53,6 +65,9 @@ void MedikamentController::modifyMedikamentM(std::string name, double konzentrat
 
 void MedikamentController::modifyMedikamentP(std::string name, double konzentration, double preis) {
 	this->repository->modifyMedikamentP(name, konzentration, preis);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());
@@ -60,6 +75,9 @@ void MedikamentController::modifyMedikamentP(std::string name, double konzentrat
 
 void MedikamentController::modifyMedikamentK(std::string name, double konzentration, double newKonzentration) {
 	this->repository->modifyMedikamentK(name, konzentration, newKonzentration);
+	if(this->undo_redo->flag){
+		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
+	}
 	this->undo_redo->flag = false;
 	this->undo_redo->setIndex(this->undo_redo->getIndex() + 1);
 	this->undo_redo->addStep(this->repository->getMedikamente());

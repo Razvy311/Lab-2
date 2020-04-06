@@ -30,7 +30,7 @@ class Undo_Redo{
         }
 
         void addStep(std::vector<Medikament *> step){
-            this->steps[index] = step;
+            this->steps.push_back(step);
         }
         void clearSteps(int from){
             this->steps.erase(this->steps.begin() + from, this->steps.end());
@@ -50,9 +50,6 @@ class Undo_Redo{
         }
 
         std::vector<Medikament *> redo(){
-            if(!flag && index < steps.size()){
-                this->clearSteps(this->index + 1);
-            }
             if(this->index >= this->steps.size() || !flag){
                 throw std::exception();
             }
