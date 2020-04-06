@@ -30,7 +30,7 @@ class MedikamentController {
 		std::vector<std::string> groupByPreis();
 
 		// Repository functions.
-		void addMedikament(Medikament* medikament);
+		void addMedikament(Medikament medikament);
 		void removeMedikament(std::string name, double konzentration);
 
 		void modifyMedikament(std::string name, double konzentration, std::string newName);

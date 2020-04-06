@@ -7,18 +7,17 @@
 class Undo_Redo{
     private:
         // We save every element of a step in a vector.
-    	std::vector<std::vector<Medikament *>> steps;
+    	std::vector<std::vector<Medikament>> steps;
         int index;
         
     public:
-        bool flag = false;  // the flag is recording wether an undo was made
 
         Undo_Redo(){
-            index = -1;
+            index = 0;
         }
 
         // Getters.
-        std::vector<std::vector<Medikament *>> getSteps(){
+        std::vector<std::vector<Medikament>> getSteps(){
             return this->steps;
         }
         int getIndex(){
@@ -30,8 +29,9 @@ class Undo_Redo{
             this->index = newIndex;
         }
 
-        void addStep(std::vector<Medikament *> step){
+        void addStep(std::vector<Medikament> step){
             // Adds a vector(a step) to the vector.
+            clearSteps(this->index);
             this->steps.push_back(step);
             this->index++;
         }
@@ -40,27 +40,29 @@ class Undo_Redo{
             this->steps.erase(this->steps.begin() + from, this->steps.end());
         }
 
-        std::vector<Medikament *> undo(){
+        std::vector<Medikament> undo(){
             // Throws an exception if there are no more steps to undo.
             // Goes to the previous step.
-            if(this->index < 0){
+            if(this->index == 0){
                 throw std::exception();
             }
-            flag = true;
-            this->index--;
-            if(this->index == -1){
-                return this->steps[0];
+            if (firstCall()) {
+            	--index;
+            	return this->steps[--this->index];
             }
-            return this->steps[this->index];
+            return this->steps[--this->index];
         }
 
-        std::vector<Medikament *> redo(){
+        std::vector<Medikament> redo(){
             // Throws an exception if there are no former steps.
             // Goes to the next step, only if an undo was previously made.
-            this->index++;
-            if(this->index >= this->steps.size() || !flag){
-                throw std::exception();
+            if (index == steps.size()) {
+            	throw std::exception();
             }
-            return this->steps[this->index];
+            return this->steps[++this->index];
+        }
+
+        bool firstCall() {
+        	return index == steps.size();
         }
 };

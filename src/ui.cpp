@@ -4,6 +4,7 @@
 using namespace std;
 
 void tasks(){
+    // Displays the tasks.
     cout<<"0. Exit."<<'\n';
     cout<<"1. Add medication."<<'\n';
     cout<<"2. Delete medication."<<'\n';
@@ -28,6 +29,7 @@ void menu(){
 
     while (true)
     {      
+        // Until we turn it off, we keep executing commands.
         cout<<'\n';  
         cout<<"Introduce a command: ";
         cin>>command;
@@ -35,6 +37,7 @@ void menu(){
             return;
         }
         if(command == 1){
+            // Add medicine.
             cout<<'\n'<<"Name of medication: ";
             cin>>name;
             cout<<'\n'<<"Concentration: ";
@@ -43,10 +46,11 @@ void menu(){
             cin>>preis;
             cout<<'\n'<<"Menge: ";
             cin>>menge;
-            controller->addMedikament(new Medikament(name, konzentration, preis, menge));
+            controller->addMedikament(Medikament(name, konzentration, preis, menge));
         }
         cout<<'\n';
         if(command == 2){
+            // Delete medicine.
             cout<<"Which medication do you want to remove?"<<'\n'<<"Introduce name: ";
             cin>>name;
             cout<<'\n'<<"Introduce concentration: ";
@@ -54,6 +58,7 @@ void menu(){
             controller->removeMedikament(name, konzentration);
         }
         if(command == 3){
+            // Replace name.
             cout<<"For what medicine do you want to replace the name?"<<'\n'<<"Introduce name: ";
             cin>>name;
             cout<<'\n'<<"Introduce concentration: ";
@@ -64,6 +69,7 @@ void menu(){
             controller->modifyMedikament(name, konzentration, newName);
         }
         if(command == 4){
+            // Replace concentration.
             cout<<"For what medicine do you want to replace the concentration?"<<'\n'<<"Introduce name: ";
             cin>>name;
             cout<<'\n'<<"Introduce concentration: ";
@@ -75,6 +81,7 @@ void menu(){
         }
 
         if(command == 5){
+            // Replace price.
             cout<<"For what medicine do you want to replace the price?"<<'\n'<<"Introduce name: ";
             cin>>name;
             cout<<'\n'<<"Introduce concentration: ";
@@ -85,6 +92,7 @@ void menu(){
             controller->modifyMedikamentK(name, konzentration, newP);
         }
         if(command == 6){
+            // Replace quantity.
             cout<<"For what medicine do you want to replace the quantity?"<<'\n'<<"Introduce name: ";
             cin>>name;
             cout<<'\n'<<"Introduce concentration: ";
@@ -95,6 +103,7 @@ void menu(){
             controller->modifyMedikamentK(name, konzentration, newM);
         }
         if(command == 7){
+            // Filter by name.
             cout<<"Introduce a name to filter by: ";
             cin>>name;
             vector<string> filterNames = controller->filterByName(name);
@@ -102,12 +111,14 @@ void menu(){
 		        cout <<'\n'<< s;
         }
         if(command == 8){
+            // Group by price.
             vector<string> groups = controller->groupByPreis();
             cout << "Groups: " << endl;
             for(string s : groups)
                 cout <<'\n'<< s;
         }
         if(command == 9){
+            // Filter by quantity.
             cout<<"Introduce a quantity to filter by: ";
             cin>>menge;
             vector<string> filterMenge = controller->filterByMenge(menge);
@@ -115,6 +126,7 @@ void menu(){
 		        cout <<'\n'<< s;
         }
         if(command == 10){
+            // Undo, if possible.
             try{
                 controller->callUndo();
             }
@@ -123,6 +135,7 @@ void menu(){
             }
         }
         if(command == 11){
+            // Redo, if possible.
             try{
                 controller->callRedo();
             }

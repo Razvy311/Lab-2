@@ -14,11 +14,11 @@
 
 class MedikamentRepository {
 	private:
-		std::vector<Medikament*> medikamente;
+		std::vector<Medikament> medikamente;
 	public:
-		~MedikamentRepository();
+//		~MedikamentRepository();
 
-		void addMedikament(Medikament* medikament);
+		void addMedikament(Medikament medikament);
 		void removeMedikament(std::string name, double konzentration);
 
 		void modifyMedikament(std::string name, double konzentration,  std::string newName);
@@ -26,8 +26,8 @@ class MedikamentRepository {
 		void modifyMedikamentP(std::string name, double konzentration, double preis);
 		void modifyMedikamentK(std::string name, double konzentration, double newKonzentration);
 
-		std::vector<Medikament*> getMedikamente();
-		void setMedikamente(std::vector<Medikament *> newMeds);
+		std::vector<Medikament> getMedikamente();
+		void setMedikamente(std::vector<Medikament > newMeds);
 };
 
 #endif /* MEDIKAMENTREPOSITORY_H_ */

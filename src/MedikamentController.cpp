@@ -23,84 +23,62 @@ MedikamentController::~MedikamentController() {
 	delete this->undo_redo;
 }
 
-void MedikamentController::addMedikament(Medikament* medikament) {
-	this->repository->addMedikament(medikament);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
+void MedikamentController::addMedikament(Medikament medikament) {
 	this->undo_redo->addStep(this->repository->getMedikamente());
+	this->repository->addMedikament(medikament);
 }
 
 void MedikamentController::removeMedikament(std::string name, double konzentration) {
-	this->repository->removeMedikament(name, konzentration);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
 	this->undo_redo->addStep(this->repository->getMedikamente());
+	this->repository->removeMedikament(name, konzentration);
 }
 
 void MedikamentController::modifyMedikament(std::string name, double konzentration, std::string newName) {
-	this->repository->modifyMedikament(name, konzentration, newName);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
 	this->undo_redo->addStep(this->repository->getMedikamente());
+	this->repository->modifyMedikament(name, konzentration, newName);
 }
 
 void MedikamentController::modifyMedikamentM(std::string name, double konzentration, int menge) {
-	this->repository->modifyMedikamentM(name, konzentration, menge);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
 	this->undo_redo->addStep(this->repository->getMedikamente());
+
+	this->repository->modifyMedikamentM(name, konzentration, menge);
 }
 
+
 void MedikamentController::modifyMedikamentP(std::string name, double konzentration, double preis) {
-	this->repository->modifyMedikamentP(name, konzentration, preis);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
 	this->undo_redo->addStep(this->repository->getMedikamente());
+	this->repository->modifyMedikamentP(name, konzentration, preis);
 }
 
 void MedikamentController::modifyMedikamentK(std::string name, double konzentration, double newKonzentration) {
-	this->repository->modifyMedikamentK(name, konzentration, newKonzentration);
-	if(this->undo_redo->flag){
-		this->undo_redo->clearSteps(this->undo_redo->getIndex() + 1);
-		this->undo_redo->flag = false;
-	}
 	this->undo_redo->addStep(this->repository->getMedikamente());
+	this->repository->modifyMedikamentK(name, konzentration, newKonzentration);
 }
 
 std::vector<std::string> MedikamentController::groupByPreis() {
 	// Get all the medicaments and sort them after the price.
-	std::vector<Medikament*> medVector;
-	for(Medikament * m : this->repository->getMedikamente())
+	std::vector<Medikament> medVector;
+	for(const Medikament& m : this->repository->getMedikamente())
 		medVector.push_back(m);
 
-	std::sort(medVector.begin(), medVector.end(), [] (Medikament* m1, Medikament* m2) {
-		return m1->getPreis() < m2->getPreis();
+	std::sort(medVector.begin(), medVector.end(), [] (Medikament m1, Medikament m2) {
+		return m1.getPreis() < m2.getPreis();
 	});
 
 	// Make the groups.
 	// Each group is separated by an empty line.
 	std::vector<std::string> result;
 
-	double currentPreis = medVector[0]->getPreis();
-	result.push_back(medVector[0]->toString());
+	double currentPreis = medVector[0].getPreis();
+	result.push_back(medVector[0].toString());
 
 	for(unsigned int i = 1; i < medVector.size(); ++i) {
-		if(currentPreis != medVector[i]->getPreis()) {
+		if(currentPreis != medVector[i].getPreis()) {
 			result.push_back(" ");
-			currentPreis = medVector[i]->getPreis();
+			currentPreis = medVector[i].getPreis();
 		}
 
-		result.push_back(medVector[i]->toString());
+		result.push_back(medVector[i].toString());
 	}
 
 	return result;
@@ -108,9 +86,9 @@ std::vector<std::string> MedikamentController::groupByPreis() {
 
 std::vector<std::string> MedikamentController::filterByName(std::string substring) {
 	std::vector<std::string> result;
-	for(Medikament * m : this->repository->getMedikamente())
-		if(m->getName().find(substring) != -1)
-			result.push_back(m->toString());
+	for(Medikament  m : this->repository->getMedikamente())
+		if(m.getName().find(substring) != -1)
+			result.push_back(m.toString());
 
 	std::sort(result.begin(), result.end());
 	return result;
@@ -118,9 +96,9 @@ std::vector<std::string> MedikamentController::filterByName(std::string substrin
 
 std::vector<std::string> MedikamentController::filterByMenge(int menge) {
 	std::vector<std::string> result;
-	for(Medikament * m : this->repository->getMedikamente())
-		if(m->getMenge() < menge)
-			result.push_back(m->toString());
+	for(Medikament  m : this->repository->getMedikamente())
+		if(m.getMenge() < menge)
+			result.push_back(m.toString());
 
 	std::sort(result.begin(), result.end());
 	return result;
@@ -131,6 +109,10 @@ MedikamentRepository * MedikamentController::getRepository() {
 }
 
 void MedikamentController::callUndo(){
+	if (undo_redo->firstCall()) {
+		this->undo_redo->addStep(this->repository->getMedikamente());
+
+	}
 	this->repository->setMedikamente(this->undo_redo->undo());
 }
 
