@@ -1,3 +1,6 @@
+//
+// Created by Nikos on 4/12/2020.
+//
 #include "Film.h"
 
 // Constructor for the class.
@@ -100,3 +103,4 @@ void Film::setLinkTrailer(std::string newLink){
 std::string Film::showFilm(){
     return titel + " " + genre + " " + std::to_string(erscheinungsjahr) + " " + std::to_string(anzahlLikes) + " " + linkTrailer;
 }
+

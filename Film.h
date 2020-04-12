@@ -1,29 +1,38 @@
+//
+// Created by Nikos on 4/12/2020.
+//
+
+#ifndef LAB5_FILM_H
+#define LAB5_FILM_H
+
 #include <string>
 
 class Film{
-    private:
-        std::string titel, genre, linkTrailer;
-        int erscheinungsjahr, anzahlLikes;
+private:
+    std::string titel, genre, linkTrailer;
+    int erscheinungsjahr, anzahlLikes;
 
-    public:
+public:
 
-        // Constructor for the class.
-        Film(std::string titel, std::string genre, int erscheinungsjahr, int anzahlLikes, std::string trailer);
+    // Constructor for the class.
+    Film(std::string titel, std::string genre, int erscheinungsjahr, int anzahlLikes, std::string trailer);
 
-        // Getters.
-        std::string getTitel();
-        std::string getGenre();
-        int getErscheinungsjahr();
-        int getAnzahlLikes();
-        std::string getLinkTrailer();
+    // Getters.
+    std::string getTitel();
+    std::string getGenre();
+    int getErscheinungsjahr();
+    int getAnzahlLikes();
+    std::string getLinkTrailer();
 
-        // Setters.
-        void setTitel(std::string newTitel);
-        void setGenre(std::string newGenre);
-        void setErscheinungsjahr(int newErscheinungsjahr);
-        void setAnzahlLikes(int newLikes);
-        void setLinkTrailer(std::string newLink);
+    // Setters.
+    void setTitel(std::string newTitel);
+    void setGenre(std::string newGenre);
+    void setErscheinungsjahr(int newErscheinungsjahr);
+    void setAnzahlLikes(int newLikes);
+    void setLinkTrailer(std::string newLink);
 
-        // String.
-        std::string showFilm();
+    // String.
+    std::string showFilm();
 };
+
+#endif //LAB5_FILM_H
