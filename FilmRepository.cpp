@@ -99,6 +99,7 @@ void FilmRepository::updateGenre(std::string titel, int jahr, std::string newGen
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setGenre(newGenre);
+            return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -119,6 +120,7 @@ void FilmRepository::updateErscheinungsjahr(std::string titel, int jahr, int new
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setErscheinungsjahr(newJahr);
+            return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -138,6 +140,7 @@ void FilmRepository::updateAnzahlLikes(std::string titel, int jahr, int newLikes
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setAnzahlLikes(newLikes);
+            return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -157,6 +160,7 @@ void FilmRepository::updateTrailer(std::string titel, int jahr, std::string newL
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setLinkTrailer(newLink);
+            return;
         }
     }
     // Otherwise, if it wasn't found, ..
