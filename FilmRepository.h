@@ -6,6 +6,7 @@
 #define LAB5_FILMREPOSITORY_H
 
 #include "Film.h"
+#include "RepoException.h"
 #include <vector>
 #include <exception>
 

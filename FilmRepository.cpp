@@ -41,7 +41,7 @@ void FilmRepository::addFilm(Film film){
     for(auto movie = this->filme.begin(); movie != this->filme.end(); ++movie){
         if(film.getTitel() == movie->getTitel() && film.getErscheinungsjahr() == movie->getErscheinungsjahr()){
             // If we found it, then it shows an error.
-            throw std::exception();
+            throw RepoException();
         }
     }
     this->filme.push_back(film);
@@ -62,7 +62,7 @@ void FilmRepository::deleteFilm(std::string titel, int jahr){
         }
     }
     // If we have not found it, ..
-    throw  std::exception();
+    throw  RepoException();
 }
 
 // Update:
@@ -83,7 +83,7 @@ void FilmRepository::updateTitel(std::string titel, int jahr, std::string newTit
         }
     }
     // Otherwise, if it wasn't found, ..
-    throw std::exception();
+    throw RepoException();
 }
 
 // - genre
@@ -99,11 +99,10 @@ void FilmRepository::updateGenre(std::string titel, int jahr, std::string newGen
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setGenre(newGenre);
-            return;
         }
     }
     // Otherwise, if it wasn't found, ..
-    throw std::exception();
+    throw RepoException();
 
 }
 
@@ -120,11 +119,10 @@ void FilmRepository::updateErscheinungsjahr(std::string titel, int jahr, int new
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setErscheinungsjahr(newJahr);
-            return;
         }
     }
     // Otherwise, if it wasn't found, ..
-    throw std::exception();
+    throw RepoException();
 }
 
 // - number of lilkes
@@ -140,11 +138,10 @@ void FilmRepository::updateAnzahlLikes(std::string titel, int jahr, int newLikes
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setAnzahlLikes(newLikes);
-            return;
         }
     }
     // Otherwise, if it wasn't found, ..
-    throw std::exception();
+    throw RepoException();
 }
 
 // - link to trailer
@@ -160,9 +157,8 @@ void FilmRepository::updateTrailer(std::string titel, int jahr, std::string newL
         if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
             movie.setLinkTrailer(newLink);
-            return;
         }
     }
     // Otherwise, if it wasn't found, ..
-    throw std::exception();
+    throw RepoException();
 }
