@@ -2,8 +2,8 @@
 // Created by Nikos on 4/12/2020.
 //
 
-#ifndef LAB5_FILMREPOSITORY_H
-#define LAB5_FILMREPOSITORY_H
+#ifndef FILMREPOSITORY_H
+#define FILMREPOSITORY_H
 
 #include "Film.h"
 #include "RepoException.h"
@@ -13,17 +13,18 @@
 class FilmRepository{
 private:
     // Contains the list with all the films.
-    std::vector<Film> filme;
+    std::vector<Film*> filme;
 public:
     // Constructor of class.
     FilmRepository();
+    ~FilmRepository();
 
     // Getter.
-    std::vector<Film> getFilme();
+    std::vector<Film*> getFilme();
 
     // Methods.
     // Adds a film to the list or throws an error if it already exists.
-    void addFilm(Film film);
+    void addFilm(Film* film);
     // Deletes a film or throws an error if it doesn't exist.
     void deleteFilm(std::string titel, int jahr);
     // Update:
@@ -39,4 +40,4 @@ public:
     void updateTrailer(std::string titel, int jahr, std::string newLink);
 };
 
-#endif //LAB5_FILMREPOSITORY_H
+#endif // FILMREPOSITORY_H

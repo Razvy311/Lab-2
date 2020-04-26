@@ -2,19 +2,19 @@
 // Created by Nikos on 4/22/2020.
 //
 
-#ifndef LAB5_ADMINCONTROLLER_H
-#define LAB5_ADMINCONTROLLER_H
+#ifndef ADMINCONTROLLER_H
+#define ADMINCONTROLLER_H
 
 #include "FilmRepository.h"
 #include "ValidatorException.h"
 
 class AdminController{
     private:
-        FilmRepository films;
+        FilmRepository* films;
 
     public:
         // Class constructor.
-        AdminController();
+        AdminController(FilmRepository* repo);
 
         // Methods:
         void addFilm(std::string titel, std::string genre, int year, int likes, std::string link);
@@ -27,4 +27,4 @@ class AdminController{
         std::string showFilms();
 };
 
-#endif //LAB5_ADMINCONTROLLER_H
+#endif // ADMINCONTROLLER_H
