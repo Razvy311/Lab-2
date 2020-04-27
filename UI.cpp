@@ -12,6 +12,7 @@
 #include "Benutzer.h"
 #include "RepoException.h"
 #include "ValidatorException.h"
+#include "tests.h"
 
 using namespace std;
 
@@ -152,7 +153,7 @@ void displayAdmin(AdminController* aController) {
                     }
                     continue;
                 }
-                
+
                 if(mod == 2){
                     string newG;
                     cout<<"New genre: ";
@@ -460,6 +461,8 @@ void displayMainMenu(AdminController* aController, BenutzerController* bControll
 }
 
 int main() {
+    tests();
+
 	FilmRepository * fRepo = new FilmRepository();
 
 	AdminController * aController = new AdminController(fRepo);
