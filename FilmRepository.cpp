@@ -6,18 +6,23 @@
 
 // Constructor of class.
 FilmRepository::FilmRepository(){
-    this->filme = std::vector<Film>();
+    this->filme = std::vector<Film*>();
     // Creates a list with the initial 10 films.
-    this->filme.push_back(Film("film1", "horror", 2001, 120, "www.youtube.com"));
-    this->filme.push_back(Film("film2", "romance", 2001, 120, "www.imdb.com"));
-    this->filme.push_back(Film("film3", "comedy", 2001, 120, "www.imdb.com"));
-    this->filme.push_back(Film("film4", "thriller", 2001, 120, "www.youtube.com"));
-    this->filme.push_back(Film("film5", "horror", 2001, 120, "www.pinterest.com"));
-    this->filme.push_back(Film("film6", "romance", 2001, 120, "www.youtube.com"));
-    this->filme.push_back(Film("film7", "science fiction", 2001, 120, "www.imdb.com"));
-    this->filme.push_back(Film("film8", "science fiction", 2001, 120, "www.deviantart.com"));
-    this->filme.push_back(Film("film9", "comedy", 2001, 120, "www.youtube.com"));
-    this->filme.push_back(Film("film10", "thriller", 2001, 120, "www.youtube.com"));
+    this->filme.push_back(new Film("film1", "horror", 2001, 120, "www.youtube.com"));
+    this->filme.push_back(new Film("film2", "romance", 2001, 120, "www.imdb.com"));
+    this->filme.push_back(new Film("film3", "comedy", 2001, 120, "www.imdb.com"));
+    this->filme.push_back(new Film("film4", "thriller", 2001, 120, "www.youtube.com"));
+    this->filme.push_back(new Film("film5", "horror", 2001, 120, "www.pinterest.com"));
+    this->filme.push_back(new Film("film6", "romance", 2001, 120, "www.youtube.com"));
+    this->filme.push_back(new Film("film7", "science fiction", 2001, 120, "www.imdb.com"));
+    this->filme.push_back(new Film("film8", "science fiction", 2001, 120, "www.deviantart.com"));
+    this->filme.push_back(new Film("film9", "comedy", 2001, 120, "www.youtube.com"));
+    this->filme.push_back(new Film("film10", "thriller", 2001, 120, "www.youtube.com"));
+}
+
+FilmRepository::~FilmRepository() {
+	for(Film* f : this->filme)
+		delete f;
 }
 
 // Getter.
@@ -26,7 +31,7 @@ FilmRepository::FilmRepository(){
     Returns the list of films.
     @return: a vector, the list of films
 */
-std::vector<Film> FilmRepository::getFilme(){
+std::vector<Film*> FilmRepository::getFilme(){
     return this->filme;
 }
 
@@ -36,10 +41,10 @@ std::vector<Film> FilmRepository::getFilme(){
     Adds a film to the list or throws an error if the film already exists.
     @param film: an object of class Film, a movie to be added
 */
-void FilmRepository::addFilm(Film film){
+void FilmRepository::addFilm(Film* film){
     // Searches if the film exists.
     for(auto movie = this->filme.begin(); movie != this->filme.end(); ++movie){
-        if(film.getTitel() == movie->getTitel() && film.getErscheinungsjahr() == movie->getErscheinungsjahr()){
+        if(film->getTitel() == (*movie)->getTitel() && film->getErscheinungsjahr() == (*movie)->getErscheinungsjahr()){
             // If we found it, then it shows an error.
             throw RepoException();
         }
@@ -55,7 +60,7 @@ void FilmRepository::addFilm(Film film){
 void FilmRepository::deleteFilm(std::string titel, int jahr){
     // Serches for the film.
     for(auto movie = this->filme.begin(); movie != this->filme.end(); ++movie){
-        if(titel== movie->getTitel() && jahr == movie->getErscheinungsjahr()){
+        if(titel== (*movie)->getTitel() && jahr == (*movie)->getErscheinungsjahr()){
             // If we found it, then we remove it.
             this->filme.erase(movie);
             return;
@@ -76,9 +81,9 @@ void FilmRepository::deleteFilm(std::string titel, int jahr){
 void FilmRepository::updateTitel(std::string titel, int jahr, std::string newTitel){
     // We search for the movie.
     for(auto & movie : this->filme){
-        if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
+        if((*movie).getTitel() == titel && (*movie).getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
-            movie.setTitel(newTitel);
+        	(*movie).setTitel(newTitel);
             return;
         }
     }
@@ -96,9 +101,10 @@ void FilmRepository::updateTitel(std::string titel, int jahr, std::string newTit
 void FilmRepository::updateGenre(std::string titel, int jahr, std::string newGenre){
     // We search for the movie.
     for(auto & movie : this->filme){
-        if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
+        if((*movie).getTitel() == titel && (*movie).getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
-            movie.setGenre(newGenre);
+        	(*movie).setGenre(newGenre);
+        	return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -116,9 +122,10 @@ void FilmRepository::updateGenre(std::string titel, int jahr, std::string newGen
 void FilmRepository::updateErscheinungsjahr(std::string titel, int jahr, int newJahr){
     // We search for the movie.
     for(auto & movie : this->filme){
-        if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
+        if((*movie).getTitel() == titel && (*movie).getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
-            movie.setErscheinungsjahr(newJahr);
+        	(*movie).setErscheinungsjahr(newJahr);
+        	return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -135,9 +142,10 @@ void FilmRepository::updateErscheinungsjahr(std::string titel, int jahr, int new
 void FilmRepository::updateAnzahlLikes(std::string titel, int jahr, int newLikes){
     // We search for the movie.
     for(auto & movie : this->filme){
-        if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
+        if((*movie).getTitel() == titel && (*movie).getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
-            movie.setAnzahlLikes(newLikes);
+        	(*movie).setAnzahlLikes(newLikes);
+        	return;
         }
     }
     // Otherwise, if it wasn't found, ..
@@ -154,9 +162,10 @@ void FilmRepository::updateAnzahlLikes(std::string titel, int jahr, int newLikes
 void FilmRepository::updateTrailer(std::string titel, int jahr, std::string newLink){
     // We search for the movie.
     for(auto & movie : this->filme){
-        if(movie.getTitel() == titel && movie.getErscheinungsjahr() == jahr){
+        if((*movie).getTitel() == titel && (*movie).getErscheinungsjahr() == jahr){
             // If it exists, we modify the title.
-            movie.setLinkTrailer(newLink);
+        	(*movie).setLinkTrailer(newLink);
+        	return;
         }
     }
     // Otherwise, if it wasn't found, ..

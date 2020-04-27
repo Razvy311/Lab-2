@@ -2,8 +2,8 @@
 // Created by Nikos on 4/12/2020.
 //
 
-#ifndef LAB5_FILM_H
-#define LAB5_FILM_H
+#ifndef FILM_H
+#define FILM_H
 
 #include <string>
 
@@ -35,4 +35,4 @@ public:
     std::string showFilm();
 };
 
-#endif //LAB5_FILM_H
+#endif // FILM_H

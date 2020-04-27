@@ -4,8 +4,8 @@
 
 #include "AdminController.h"
 
-AdminController::AdminController() {
-    this->films = FilmRepository();
+AdminController::AdminController(FilmRepository* repo) {
+    this->films = repo;
 }
 
 /*
@@ -21,7 +21,7 @@ void AdminController::addFilm(std::string titel, std::string genre, int year, in
     if(year < 1897 || year > 2020 || likes < 0){
         throw ValidatorException();
     }
-    this->films.addFilm(Film(titel, genre, year, likes, link));
+    this->films->addFilm(new Film(titel, genre, year, likes, link));
 }
 
 /*
@@ -35,7 +35,7 @@ void AdminController::deleteFilm(std::string titel, int year) {
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.deleteFilm(titel, year);
+    this->films->deleteFilm(titel, year);
 }
 
 /*
@@ -50,7 +50,7 @@ void AdminController::modifyGenre(std::string titel, int year, std::string newGe
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.updateGenre(titel, year, newGenre);
+    this->films->updateGenre(titel, year, newGenre);
 }
 
 /*
@@ -65,7 +65,7 @@ void AdminController::modifyTitel(std::string titel, int year, std::string newTi
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.updateTitel(titel, year, newTitel);
+    this->films->updateTitel(titel, year, newTitel);
 }
 
 /*
@@ -80,7 +80,7 @@ void AdminController::modifyYear(std::string titel, int year, int newYear) {
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.updateErscheinungsjahr(titel, year, newYear);
+    this->films->updateErscheinungsjahr(titel, year, newYear);
 }
 
 /*
@@ -95,7 +95,7 @@ void AdminController::modifyLikes(std::string titel, int year, int newLikes) {
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.updateAnzahlLikes(titel, year, newLikes);
+    this->films->updateAnzahlLikes(titel, year, newLikes);
 }
 
 /*
@@ -110,18 +110,18 @@ void AdminController::modufyLink(std::string titel, int year, std::string newLin
     if(year < 1897 || year > 2020){
         throw ValidatorException();
     }
-    this->films.updateTrailer(titel, year, newLink);
+    this->films->updateTrailer(titel, year, newLink);
 }
 
 /*
- * This method shows all the films.
+ * This method shows all the films->
  * @return: a string, the list of films
 */
 std::string AdminController::showFilms() {
     std::string filme;
-    for(auto & film : this->films.getFilme()){
+    for(auto & film : this->films->getFilme()){
         // We add the movie.
-        filme += film.showFilm() + '\n';
+        filme += film->showFilm() + '\n';
     }
     return filme;
 }
