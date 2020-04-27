@@ -10,6 +10,7 @@
 
 #include "BenutzerRepository.h"
 
+/** Constructs a new repository for the Users. */
 BenutzerRepository::BenutzerRepository() {
 	// Initial 10 users.
 	this->benutzer.push_back(new Benutzer("Marsha", "Pittman"));
@@ -24,11 +25,20 @@ BenutzerRepository::BenutzerRepository() {
 	this->benutzer.push_back(new Benutzer("Amy", "Palmer"));
 }
 
+/** The destructor of this Repository. */
 BenutzerRepository::~BenutzerRepository() {
 	for(Benutzer* b : this->benutzer)
 		delete b;
 }
 
+/**
+ * Adds a new user to this repository.
+ *
+ * @param vorname
+ *            - the surname of the user.
+ * @param name
+ *            - the name of the user.
+ */
 void BenutzerRepository::addUser(std::string vorname, std::string name) {
 	if(find_if(this->benutzer.begin(), this->benutzer.end(), [vorname, name](Benutzer* b) { return b->getVorname() == vorname and b->getName() == name; }) == this->benutzer.end()) {
 		this->benutzer.push_back(new Benutzer(vorname, name));
@@ -37,6 +47,14 @@ void BenutzerRepository::addUser(std::string vorname, std::string name) {
 		std::cout << "Benutzer existier schon!" << std::endl;
 }
 
+/**
+ * Removes a user from this repository.
+ *
+ * @param vorname
+ *            - the surname of the user.
+ * @param name
+ *            - the name of the user.
+ */
 void BenutzerRepository::removeUser(std::string vorname, std::string name) {
 	auto match = find_if(this->benutzer.begin(), this->benutzer.end(), [vorname, name](Benutzer* b) { return b->getVorname() == vorname and b->getName() == name; });
 
@@ -48,10 +66,20 @@ void BenutzerRepository::removeUser(std::string vorname, std::string name) {
 	}
 }
 
+/**
+ * Returns a pointer of an User based on its index in the vector.
+ *
+ * @return A pointer of an User base on its index in the vector.
+ */
 Benutzer* BenutzerRepository::getBenutzerByIndex(int index) {
 	return this->benutzer[index];
 }
 
+/**
+ * Returns a vector containing pointers for every created User.
+ *
+ * @return A vector containing pointers for every created User.
+ */
 std::vector<Benutzer*> BenutzerRepository::getAllBenutzer() {
 	return this->benutzer;
 }

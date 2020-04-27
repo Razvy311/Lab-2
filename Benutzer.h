@@ -20,13 +20,16 @@ class Benutzer {
 
 		std::vector<Film*> watchlist;
 	public:
+		// Constructor
 		Benutzer(std::string vorname, std::string name);
 
+		// Getters.
 		std::string getName();
 		std::string getVorname();
 
 		std::vector<Film*> getWatchList();
 
+		// WatchList Utilities.
 		void addFilm(Film* f);
 		void removeFilm(Film* f);
 
